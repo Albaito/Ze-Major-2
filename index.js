@@ -5,9 +5,8 @@ require('dotenv').config(); // allows accessing .env variables in file
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+// command handler
 client.commands = new Collection();
-
-
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
@@ -27,6 +26,21 @@ for (const folder of commandFolders) {
         else {
             console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute property."`);
         }
+    }
+}
+
+// event handler
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+    const filePath = path.join(eventsPath, file);
+    const event = require(filePath);
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args));
+    }
+    else {
+        client.on(event.name, (...args) => event.execute(...args));
     }
 }
 
@@ -55,11 +69,6 @@ client.on(Events.InteractionCreate, async interaction => {
     }
     console.log(interaction);
 });
-
-client.once(Events.ClientReady, c => {
-    console.log(`${c.user.tag} is now online!`)
-});
-
 
 // Logs into discord using the client's token
 client.login(process.env.TOKEN);    // usage of .env to maintain a secure token
