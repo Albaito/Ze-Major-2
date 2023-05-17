@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 
 
@@ -7,7 +7,10 @@ module.exports = {
     .setName('user')
     .setDescription('Provides information about the user.'),
     async execute(interaction) {
-
-        await interaction.reply(`This command was run by ${interaction.user.username}, who joined on ${interaction.member.joinedAt}.`)
+        await interaction.reply({ embeds: [
+            new EmbedBuilder()
+            .setTitle('Hello World!')
+            .setAuthor({name: interaction.user.tag})
+        ]});
     },
-}
+};
