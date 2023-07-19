@@ -1,7 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
-
-
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('user')
@@ -9,8 +7,8 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply({ embeds: [
             new EmbedBuilder()
-            .setTitle('Hello World!')
-            .setAuthor({name: interaction.user.tag})
+            .setTitle('')
+            .setAuthor({name: interaction.user.tag, iconURL: interaction.user.displayAvatarUrl()})
         ]});
     },
 };
