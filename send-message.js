@@ -18,24 +18,16 @@ const client = new Client({
 
 const roles = [
     {
-        id: '1043387428322426980',
-        label: 'Darktide',
+        id: "913619765220765746",
+        label: "Hearts of Iron IV"
     },
     {
-        id: '1009261992038629386',
-        label: 'SCP: Secret Lab',
+        id: "919269283282948218",
+        label: "Stellaris"
     },
     {
-        id: '1095960057730039830',
-        label: 'VR Chat',
-    },
-    {
-        id: '1058222783395541043',
-        label: 'Watch Along'
-    },
-    {
-        id: '1095462076610252882',
-        label: 'Arma 3'
+        id: "1132145293543092294",
+        label: "MechWarrior Online"
     }
 ];
 
